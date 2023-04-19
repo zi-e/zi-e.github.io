@@ -146,6 +146,9 @@
             url: 'https://dsszw.cn/api.php?act=geturl2&t=' + t,
             dataType: 'json',
             success: function (data) {
+                if (data.pwd == "") {
+                    location.href = data.url
+                }
                 url = data.url
                 pwd = data.pwd
                 xcx = data.xcx
