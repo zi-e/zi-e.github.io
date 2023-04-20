@@ -6,7 +6,7 @@
     <meta content="never" name="referrer">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网址访问受到限制</title>
+    <title>跳转中...</title>
     <style>
         html,
         body {
@@ -113,7 +113,7 @@
 </head>
 
 <body>
-    <div class="content">
+    <div class="content" style="display: none;">
         <div class="pwd_logo"><img
                 src="https://gchat.qpic.cn/gchatpic_new/10001/10001-10001-73CBDF2A7865024BB5EA2CFDA68517A4/0"></div>
         <div class="pwd_content">
@@ -146,13 +146,18 @@
             url: 'https://dsszw.cn/api.php?act=geturl2&t=' + t,
             dataType: 'json',
             success: function (data) {
-                if (data.pwd == "") {
+                console.log(data.pwd)
+                if (data.pwd == "" || data.pwd == undefined) {
                     location.href = data.url
+                    return false;
+                } else {
+                    document.title = "网址访问受到限制";
+                    $(".content").show();
+                    url = data.url
+                    pwd = data.pwd
+                    xcx = data.xcx
+                    $("#xcx").attr("src", xcx);
                 }
-                url = data.url
-                pwd = data.pwd
-                xcx = data.xcx
-                $("#xcx").attr("src", xcx);
             },
             error: function (data) {
 
